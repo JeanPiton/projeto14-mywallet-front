@@ -14,7 +14,10 @@ export default function SignInPage() {
     event.preventDefault()
     const data = {email, password}
     axios.post(`${import.meta.env.VITE_API_URL}/sign-in`,data)
-    .then(()=>nav("/home"))
+    .then(re=>{
+      const data = re.data
+      localStorage.setItem("user",JSON.stringify(data))
+      nav("/home")})
     .catch(e=>alert(e.response.data))
   }
 
