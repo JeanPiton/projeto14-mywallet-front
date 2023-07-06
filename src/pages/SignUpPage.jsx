@@ -16,7 +16,7 @@ export default function SignUpPage() {
       return alert("Senhas não são iguais")
     }
     const data = {name, email, password}
-    axios.post(`${import.meta.env.VITE_API_URL}/users`,data)
+    axios.post(`${import.meta.env.VITE_API_URL}/sign-up`,data)
     .then(()=>alert("Cadastro realizado com sucesso"))
     .catch(e=>alert(e.response.data))
   }
