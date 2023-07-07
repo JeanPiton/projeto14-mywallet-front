@@ -11,9 +11,10 @@ export default function UserProvider({children}){
 
     useEffect(()=>{
         if(lsUser==null) return navigate("/")
-        axios.post(`${import.meta.env.VITE_API_URL}/token`,user)
-        .then(()=>navigate("/home"))
-        .catch(()=>navigate("/"))
+        axios.post(`${import.meta.env.VITE_API_URL}/token`,{email:user.email,token:user.token})
+        .then(()=>{navigate("/home")})
+        .catch(()=>{navigate("/")
+        console.log(user)})
     },[])
 
     return (

@@ -1,12 +1,19 @@
 import styled from "styled-components"
 import { BiExit } from "react-icons/bi"
-import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai"
+import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai" 
+import { UserContext } from "../contexts/UserContext"
+import { useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export default function HomePage() {
+  const {user} = useContext(UserContext)
+  const [name, setName] = useState(user.name)
+  const nav = useNavigate()
+
   return (
     <HomeContainer>
       <Header>
-        <h1>Olá, Fulano</h1>
+        <h1>Olá, {name}</h1>
         <BiExit />
       </Header>
 
@@ -37,11 +44,11 @@ export default function HomePage() {
 
 
       <ButtonsContainer>
-        <button>
+        <button onClick={()=>nav("/nova-transacao/entrada")}>
           <AiOutlinePlusCircle />
           <p>Nova <br /> entrada</p>
         </button>
-        <button>
+        <button onClick={()=>nav("/nova-transacao/saida")}>
           <AiOutlineMinusCircle />
           <p>Nova <br />saída</p>
         </button>

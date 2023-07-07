@@ -5,12 +5,15 @@ import SignInPage from "./pages/SignInPage"
 import SignUpPage from "./pages/SignUpPage"
 import TransactionsPage from "./pages/TransactionPage"
 import UserProvider from "./contexts/UserContext"
+import { useState } from "react"
 
 export default function App() {
+  const [user, setUser] = useState({})
+
   return (
     <PagesContainer>
       <BrowserRouter>
-        <UserProvider>
+        <UserProvider value={{user, setUser}}>
           <Routes>
             <Route path="/" element={<SignInPage />} />
             <Route path="/cadastro" element={<SignUpPage />} />

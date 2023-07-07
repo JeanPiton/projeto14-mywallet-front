@@ -1,11 +1,13 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
 import MyWalletLogo from "../components/MyWalletLogo"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { UserContext } from "../contexts/UserContext"
 
 export default function SignInPage() {
+  const {setUser} = useContext(UserContext)
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
   const nav = useNavigate()
@@ -17,6 +19,7 @@ export default function SignInPage() {
     .then(re=>{
       const data = re.data
       localStorage.setItem("user",JSON.stringify(data))
+      setUser(data)
       nav("/home")})
     .catch(e=>alert(e.response.data))
   }

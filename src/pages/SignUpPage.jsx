@@ -3,8 +3,10 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 import MyWalletLogo from "../components/MyWalletLogo"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 export default function SignUpPage() {
+  const nav = useNavigate()
   const [name,setName] = useState("")
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
@@ -17,7 +19,7 @@ export default function SignUpPage() {
     }
     const data = {name, email, password}
     axios.post(`${import.meta.env.VITE_API_URL}/sign-up`,data)
-    .then(()=>alert("Cadastro realizado com sucesso"))
+    .then(()=>nav("/"))
     .catch(e=>alert(e.response.data))
   }
 
