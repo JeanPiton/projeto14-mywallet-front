@@ -11,11 +11,11 @@ export default function HomePage() {
   const [name, setName] = useState(user.name)
   const [list, setList] = useState([])
   const [total, setTotal] = useState({type:"positivo",value:0})
+  const config = {headers:{authorization:`Bearer ${user.token}`}}
   const nav = useNavigate()
 
   useEffect(()=>{
     if(list.length == 0){
-      const config = {headers:{authorization:`Bearer ${user.token}`}}
       axios.get(`${import.meta.env.VITE_API_URL}/transaction`,config)
       .then(res=>{setList(res.data.reverse())})
       .catch(err=>alert(err.response.data))
@@ -39,11 +39,18 @@ export default function HomePage() {
     setTotal({type,value:sum})
   }
 
+  function logOut(){
+    axios.delete(`${import.meta.env.VITE_API_URL}/session`,config)
+    .catch(err=>console.log(err))
+    localStorage.clear()
+    nav("/")
+  }
+
   return (
     <HomeContainer>
       <Header>
         <h1>Olá, {name}</h1>
-        <BiExit />
+        <BiExit onClick={logOut}/>
       </Header>
 
       <TransactionsContainer>
