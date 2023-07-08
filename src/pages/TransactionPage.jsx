@@ -13,7 +13,7 @@ export default function TransactionsPage() {
 
   function submit(event){
     event.preventDefault()
-    const data = {value:parseFloat(tValue),desc:tDesc,type:tipo,email:user.email}
+    const data = {value:parseFloat(parseFloat(tValue).toFixed(2)),desc:tDesc,type:tipo,email:user.email}
     const config = {headers:{authorization:`Bearer ${user.token}`}}
     axios.post(`${import.meta.env.VITE_API_URL}/transaction`,data,config)
     .then(()=>nav("/home"))

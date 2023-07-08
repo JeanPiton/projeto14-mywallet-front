@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import axios from "axios"
 import { BiExit } from "react-icons/bi"
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai" 
 import { UserContext } from "../contexts/UserContext"
@@ -8,7 +9,35 @@ import { useNavigate } from "react-router-dom"
 export default function HomePage() {
   const {user} = useContext(UserContext)
   const [name, setName] = useState(user.name)
+  const [list, setList] = useState([])
+  const [total, setTotal] = useState({type:"positivo",value:0})
   const nav = useNavigate()
+
+  useEffect(()=>{
+    if(list.length == 0){
+      const config = {headers:{authorization:`Bearer ${user.token}`}}
+      axios.get(`${import.meta.env.VITE_API_URL}/transaction`,config)
+      .then(res=>{setList(res.data.reverse())})
+      .catch(err=>alert(err.response.data))
+    }
+    console.log(list)
+    getTotal()
+    console.log(total)
+  },[list])
+
+  function getTotal(){
+    let sum = 0
+    let type = "positivo"
+    list.map(e=>{
+      if(e.type==="entrada") sum+=parseFloat(e.value)
+      if(e.type==="saida") sum-=parseFloat(e.value)
+    })
+    if(sum<0){
+      sum = sum*(-1)
+      type = "negativo"
+    }
+    setTotal({type,value:sum})
+  }
 
   return (
     <HomeContainer>
@@ -19,26 +48,20 @@ export default function HomePage() {
 
       <TransactionsContainer>
         <ul>
-          <ListItemContainer>
-            <div>
-              <span>30/11</span>
-              <strong>Almoço mãe</strong>
-            </div>
-            <Value color={"negativo"}>120,00</Value>
-          </ListItemContainer>
-
-          <ListItemContainer>
-            <div>
-              <span>15/11</span>
-              <strong>Salário</strong>
-            </div>
-            <Value color={"positivo"}>3000,00</Value>
-          </ListItemContainer>
+          {list.map(e=>(
+            <ListItemContainer key={e._id}>
+              <div>
+                <span>{e.day}</span>
+                <strong>{e.desc}</strong>
+              </div>
+              <Value color={e.type=="entrada"?"positivo":"negativo"}>{parseFloat(e.value).toFixed(2)}</Value>
+            </ListItemContainer>
+          ))}
         </ul>
 
         <article>
           <strong>Saldo</strong>
-          <Value color={"positivo"}>2880,00</Value>
+          <Value color={total.type}>{total.value.toFixed(2)}</Value>
         </article>
       </TransactionsContainer>
 
