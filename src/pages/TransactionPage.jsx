@@ -24,9 +24,9 @@ export default function TransactionsPage() {
     <TransactionsContainer>
       <h1>Nova TRANSAÇÃO</h1>
       <form onSubmit={submit}>
-        <input placeholder="Valor" type="number" step="0.01" min={0} required value={tValue} onChange={e=>setTValue(e.target.value)}/>
-        <input placeholder="Descrição" type="text" required value={tDesc} onChange={e=>setTDesc(e.target.value)}/>
-        <button>Salvar TRANSAÇÃO</button>
+        <input placeholder="Valor" type="number" step="0.01" min={0} required value={tValue} onChange={e=>setTValue(e.target.value)} data-test="registry-amount-input"/>
+        <input placeholder="Descrição" type="text" required value={tDesc} onChange={e=>setTDesc(e.target.value)} data-test="registry-name-input"/>
+        <button data-test="registry-save">Salvar TRANSAÇÃO</button>
       </form>
     </TransactionsContainer>
   )

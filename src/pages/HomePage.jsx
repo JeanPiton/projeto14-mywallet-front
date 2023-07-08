@@ -49,8 +49,8 @@ export default function HomePage() {
   return (
     <HomeContainer>
       <Header>
-        <h1>Olá, {name}</h1>
-        <BiExit onClick={logOut}/>
+        <h1 data-test="user-name">Olá, {name}</h1>
+        <BiExit onClick={logOut} data-test="logout"/>
       </Header>
 
       <TransactionsContainer>
@@ -59,26 +59,26 @@ export default function HomePage() {
             <ListItemContainer key={e._id}>
               <div>
                 <span>{e.day}</span>
-                <strong>{e.desc}</strong>
+                <strong data-test="registry-name">{e.desc}</strong>
               </div>
-              <Value color={e.type=="entrada"?"positivo":"negativo"}>{parseFloat(e.value).toFixed(2)}</Value>
+              <Value color={e.type=="entrada"?"positivo":"negativo"} data-test="registry-amount">{parseFloat(e.value).toFixed(2)}</Value>
             </ListItemContainer>
           ))}
         </ul>
 
         <article>
           <strong>Saldo</strong>
-          <Value color={total.type}>{total.value.toFixed(2)}</Value>
+          <Value color={total.type} data-test="total-amount">{total.value.toFixed(2)}</Value>
         </article>
       </TransactionsContainer>
 
 
       <ButtonsContainer>
-        <button onClick={()=>nav("/nova-transacao/entrada")}>
+        <button onClick={()=>nav("/nova-transacao/entrada")} data-test="new-income">
           <AiOutlinePlusCircle />
           <p>Nova <br /> entrada</p>
         </button>
-        <button onClick={()=>nav("/nova-transacao/saida")}>
+        <button onClick={()=>nav("/nova-transacao/saida")} data-test="new-expense">
           <AiOutlineMinusCircle />
           <p>Nova <br />saída</p>
         </button>

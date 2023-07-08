@@ -27,11 +27,11 @@ export default function SignUpPage() {
     <SingUpContainer>
       <form onSubmit={submit}>
         <MyWalletLogo />
-        <input placeholder="Nome" type="text" required value={name} onChange={e=>setName(e.target.value)}/>
-        <input placeholder="E-mail" type="email" required value={email} onChange={e=>setEmail(e.target.value)}/>
-        <input placeholder="Senha" type="password" autocomplete="new-password" required value={password} onChange={e=>setPassword(e.target.value)}/>
-        <input placeholder="Confirme a senha" type="password" autocomplete="new-password" required value={confirm} onChange={e=>setConfirm(e.target.value)}/>
-        <button>Cadastrar</button>
+        <input placeholder="Nome" type="text" required value={name} onChange={e=>setName(e.target.value)} data-test="name"/>
+        <input placeholder="E-mail" type="email" required value={email} onChange={e=>setEmail(e.target.value)} data-test="email"/>
+        <input placeholder="Senha" type="password" autocomplete="new-password" required value={password} onChange={e=>setPassword(e.target.value)} data-test="password"/>
+        <input placeholder="Confirme a senha" type="password" autocomplete="new-password" required value={confirm} onChange={e=>setConfirm(e.target.value)} data-test="conf-password"/>
+        <button data-test="sign-up-submit">Cadastrar</button>
       </form>
 
       <Link to="/">
