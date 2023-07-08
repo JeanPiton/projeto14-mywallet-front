@@ -10,10 +10,10 @@ export default function UserProvider({children}){
     const navigate = useNavigate()
 
     useEffect(()=>{
-        if(lsUser==null) return navigate("/")
+        if(lsUser==null&&window.location.pathname!="/"&&window.location.pathname!="/cadastro") return navigate("/")
         axios.post(`${import.meta.env.VITE_API_URL}/token`,{email:user.email,token:user.token})
         .then(()=>{navigate("/home")})
-        .catch(()=>{navigate("/")
+        .catch(()=>{if(window.location.pathname!="/"&&window.location.pathname!="/cadastro") navigate("/")
         console.log(user)})
     },[])
 
