@@ -11,18 +11,20 @@ export default function HomePage() {
   const [name, setName] = useState(user.name)
   const [list, setList] = useState([])
   const [total, setTotal] = useState({type:"positivo",value:0})
+  const firstLoad = true;
   const config = {headers:{authorization:`Bearer ${user.token}`}}
   const nav = useNavigate()
 
   useEffect(()=>{
-    if(list.length == 0){
+    if(list.length == 0 && firstLoad){
       axios.get(`${import.meta.env.VITE_API_URL}/transaction`,config)
       .then(res=>{setList(res.data.reverse())})
       .catch(err=>alert(err.response.data))
+      firstLoad = false
     }
     console.log("effect")
     getTotal()
-  },[])
+  },[list])
 
   function getTotal(){
     let sum = 0
