@@ -9,20 +9,22 @@ import { useNavigate } from "react-router-dom"
 export default function HomePage() {
   const {user} = useContext(UserContext)
   const [name, setName] = useState(user.name)
-  const [list, setList] = useState([])
+  const [list, setList] = useState()
   const [total, setTotal] = useState({type:"positivo",value:0})
   const config = {headers:{authorization:`Bearer ${user.token}`}}
   const nav = useNavigate()
 
   useEffect(()=>{
-    if(list.length == 0){
+    if(list == undefined){
       axios.get(`${import.meta.env.VITE_API_URL}/transaction`,config)
       .then(res=>{setList(res.data.reverse())})
       .catch(err=>alert(err.response.data))
+      console.log("list")
+    }else{
+      getTotal()
     }
     console.log("effect")
-    getTotal()
-  },[list.length])
+  },[list])
 
   function getTotal(){
     let sum = 0
@@ -54,7 +56,7 @@ export default function HomePage() {
 
       <TransactionsContainer>
         <ul>
-          {list.map(e=>(
+          {list==undefined?console.log("none"):list.map(e=>(
             <ListItemContainer key={e._id}>
               <div>
                 <span>{e.day}</span>
