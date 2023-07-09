@@ -20,10 +20,9 @@ export default function HomePage() {
       .then(res=>{setList(res.data.reverse())})
       .catch(err=>alert(err.response.data))
     }
-    console.log(list)
+    console.log("effect")
     getTotal()
-    console.log(total)
-  },[list])
+  },[])
 
   function getTotal(){
     let sum = 0
