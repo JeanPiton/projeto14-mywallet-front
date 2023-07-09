@@ -60,14 +60,14 @@ export default function HomePage() {
                 <span>{e.day}</span>
                 <strong data-test="registry-name">{e.desc}</strong>
               </div>
-              <Value color={e.type=="entrada"?"positivo":"negativo"} data-test="registry-amount">{parseFloat(e.value).toFixed(2)}</Value>
+              <Value color={e.type=="entrada"?"positivo":"negativo"} data-test="registry-amount">{parseFloat(e.value).toFixed(2).replace(".",",")}</Value>
             </ListItemContainer>
           ))}
         </ul>
 
         <article>
           <strong>Saldo</strong>
-          <Value color={total.type} data-test="total-amount">{total.value.toFixed(2)}</Value>
+          <Value color={total.type} data-test="total-amount">{total.value.toFixed(2).replace(".",",")}</Value>
         </article>
       </TransactionsContainer>
 
