@@ -48,10 +48,10 @@ export default function HomePage() {
   }
 
   function deleteItem(id){
-    axios.delete(`${import.meta.env.VITE_API_URL}/${id}`,config)
+    axios.delete(`${import.meta.env.VITE_API_URL}/transaction/${id}`,config)
+    .then(r=>console.log(r))
     .catch(e=>{console.log(e)})
     .then(()=>setList())
-    setList()
     console.log(id)
   }
 
@@ -70,7 +70,7 @@ export default function HomePage() {
                 <span>{e.day}</span>
                 <strong data-test="registry-name">{e.desc}</strong>
               </div>
-              <Value color={e.type=="entrada"?"positivo":"negativo"} data-test="registry-amount">{parseFloat(e.value).toFixed(2).replace(".",",")}<strong onClick={()=>deleteItem(e._id)}>X</strong></Value>
+              <Value color={e.type=="entrada"?"positivo":"negativo"} data-test="registry-amount">{parseFloat(e.value).toFixed(2).replace(".",",")}<strong onClick={()=>deleteItem(e._id)} data-test="registry-delete">X</strong></Value>
             </ListItemContainer>
           ))}
         </ul>
