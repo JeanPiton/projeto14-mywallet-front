@@ -48,11 +48,13 @@ export default function HomePage() {
   }
 
   function deleteItem(id){
-    axios.delete(`${import.meta.env.VITE_API_URL}/transaction/${id}`,config)
-    .then(r=>console.log(r))
-    .catch(e=>{console.log(e)})
-    .then(()=>setList())
-    console.log(id)
+    if(confirm("Você deseja apagar este item?")){
+      axios.delete(`${import.meta.env.VITE_API_URL}/transaction/${id}`,config)
+      .then(r=>console.log(r))
+      .catch(e=>{console.log(e)})
+      .then(()=>setList())
+      console.log(id)
+    }
   }
 
   return (
