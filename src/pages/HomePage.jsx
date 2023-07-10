@@ -70,7 +70,7 @@ export default function HomePage() {
                 <span>{e.day}</span>
                 <strong data-test="registry-name">{e.desc}</strong>
               </div>
-              <Value color={e.type=="entrada"?"positivo":"negativo"} data-test="registry-amount">{parseFloat(e.value).toFixed(2).replace(".",",")}<strong onClick={()=>deleteItem(e._id)} data-test="registry-delete">X</strong></Value>
+              <Value color={e.type=="entrada"?"positivo":"negativo"}><data data-test="registry-amount">{parseFloat(e.value).toFixed(2).replace(".",",")}</data><strong onClick={()=>deleteItem(e._id)} data-test="registry-delete">X</strong></Value>
             </ListItemContainer>
           ))}
         </ul>
