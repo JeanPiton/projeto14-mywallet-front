@@ -47,6 +47,14 @@ export default function HomePage() {
     nav("/")
   }
 
+  function deleteItem(id){
+    axios.delete(`${import.meta.env.VITE_API_URL}/${id}`,config)
+    .catch(e=>{console.log(e)})
+    .then(()=>setList())
+    setList()
+    console.log(id)
+  }
+
   return (
     <HomeContainer>
       <Header>
@@ -62,7 +70,7 @@ export default function HomePage() {
                 <span>{e.day}</span>
                 <strong data-test="registry-name">{e.desc}</strong>
               </div>
-              <Value color={e.type=="entrada"?"positivo":"negativo"} data-test="registry-amount">{parseFloat(e.value).toFixed(2).replace(".",",")}</Value>
+              <Value color={e.type=="entrada"?"positivo":"negativo"} data-test="registry-amount">{parseFloat(e.value).toFixed(2).replace(".",",")}<strong onClick={()=>deleteItem(e._id)}>X</strong></Value>
             </ListItemContainer>
           ))}
         </ul>
@@ -144,6 +152,10 @@ const Value = styled.div`
   font-size: 16px;
   text-align: right;
   color: ${(props) => (props.color === "positivo" ? "green" : "red")};
+  strong{
+    color: #c6c6c6;
+    margin-left: 10px;
+  }
 `
 const ListItemContainer = styled.li`
   display: flex;
