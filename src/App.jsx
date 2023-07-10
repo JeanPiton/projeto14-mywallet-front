@@ -6,6 +6,7 @@ import SignUpPage from "./pages/SignUpPage"
 import TransactionsPage from "./pages/TransactionPage"
 import UserProvider from "./contexts/UserContext"
 import { useState } from "react"
+import EditPage from "./pages/EditPage"
 
 export default function App() {
   const [user, setUser] = useState({})
@@ -19,6 +20,7 @@ export default function App() {
             <Route path="/cadastro" element={<SignUpPage />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/nova-transacao/:tipo" element={<TransactionsPage />} />
+            <Route path="/editar-registro/:tipo/:id" element={<EditPage />}/>
           </Routes>
         </UserProvider>
        </BrowserRouter>

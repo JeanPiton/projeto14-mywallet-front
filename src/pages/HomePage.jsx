@@ -70,7 +70,7 @@ export default function HomePage() {
             <ListItemContainer key={e._id}>
               <div>
                 <span>{e.day}</span>
-                <strong data-test="registry-name">{e.desc}</strong>
+                <strong onClick={()=>{nav(`/editar-registro/${e.type}/${e._id}`,{state:{value:e.value,desc:e.desc}})}} data-test="registry-name">{e.desc}</strong>
               </div>
               <Value color={e.type=="entrada"?"positivo":"negativo"}><data data-test="registry-amount">{parseFloat(e.value).toFixed(2).replace(".",",")}</data><strong onClick={()=>deleteItem(e._id)} data-test="registry-delete">X</strong></Value>
             </ListItemContainer>
