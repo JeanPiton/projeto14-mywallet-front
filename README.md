@@ -21,3 +21,7 @@ This is a website with a login system that allows the user to create income and 
 - Create file `.env` as seen in `.env.example`
 - To run in dev mode use `npm run dev`
 - To run in deploy mode use `npm run build`
+
+# How to run docker image
+- Pull image with `docker pull jeanpiton/mywallet-front`
+- Run `docker run jeanpiton/mywallet-front`
