@@ -13,6 +13,7 @@ This is a website with a login system that allows the user to create income and 
 - react-dom
 - styled-components
 - vite
+- docker
 
 # How to run 
 - Clone repository
