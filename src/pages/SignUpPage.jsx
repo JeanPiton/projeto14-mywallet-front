@@ -1,9 +1,8 @@
+import axios from "axios"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import MyWalletLogo from "../components/MyWalletLogo"
-import axios from "axios"
-import { useNavigate } from "react-router-dom"
 
 export default function SignUpPage() {
   const nav = useNavigate()
@@ -20,7 +19,7 @@ export default function SignUpPage() {
     const data = {name, email, password}
     axios.post(`${import.meta.env.VITE_API_URL}/sign-up`,data)
     .then(()=>nav("/"))
-    .catch(e=>alert(e.response.data))
+    .catch(e=>alert(e.response.data.message))
   }
 
   return (

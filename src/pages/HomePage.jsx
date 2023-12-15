@@ -18,7 +18,7 @@ export default function HomePage() {
     if(list == undefined){
       axios.get(`${import.meta.env.VITE_API_URL}/transaction`,config)
       .then(res=>{setList(res.data.reverse())})
-      .catch(err=>alert(err.response.data))
+      .catch(err=>alert(err.response.data.message))
     }else{
       getTotal()
     }

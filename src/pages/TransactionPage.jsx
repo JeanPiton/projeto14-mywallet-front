@@ -1,8 +1,8 @@
+import axios from "axios"
 import { useContext, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import styled from "styled-components"
 import { UserContext } from "../contexts/UserContext"
-import axios from "axios"
 
 export default function TransactionsPage() {
   const nav = useNavigate()
@@ -17,7 +17,7 @@ export default function TransactionsPage() {
     const config = {headers:{authorization:`Bearer ${user.token}`}}
     axios.post(`${import.meta.env.VITE_API_URL}/transaction`,data,config)
     .then(()=>nav("/home"))
-    .catch(e=>alert(e.response.data))
+    .catch(e=>alert(e.response.data.message))
   }
 
   return (

@@ -1,9 +1,8 @@
-import { useContext, useState } from "react"
-import styled from "styled-components"
-import { Link } from "react-router-dom"
-import MyWalletLogo from "../components/MyWalletLogo"
 import axios from "axios"
-import { useNavigate } from "react-router-dom"
+import { useContext, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import styled from "styled-components"
+import MyWalletLogo from "../components/MyWalletLogo"
 import { UserContext } from "../contexts/UserContext"
 
 export default function SignInPage() {
@@ -21,7 +20,7 @@ export default function SignInPage() {
       localStorage.setItem("user",JSON.stringify(data))
       setUser(data)
       nav("/home")})
-    .catch(e=>alert(e.response.data))
+    .catch(e=>alert(e.response.data.message))
   }
 
   return (
