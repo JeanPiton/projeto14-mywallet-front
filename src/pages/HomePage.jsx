@@ -1,10 +1,10 @@
-import styled from "styled-components"
 import axios from "axios"
-import { BiExit } from "react-icons/bi"
-import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai" 
-import { UserContext } from "../contexts/UserContext"
 import { useContext, useEffect, useState } from "react"
+import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai"
+import { BiExit } from "react-icons/bi"
 import { useNavigate } from "react-router-dom"
+import styled from "styled-components"
+import { UserContext } from "../contexts/UserContext"
 
 export default function HomePage() {
   const {user} = useContext(UserContext)
@@ -19,11 +19,9 @@ export default function HomePage() {
       axios.get(`${import.meta.env.VITE_API_URL}/transaction`,config)
       .then(res=>{setList(res.data.reverse())})
       .catch(err=>alert(err.response.data))
-      console.log("list")
     }else{
       getTotal()
     }
-    console.log("effect")
   },[list])
 
   function getTotal(){
@@ -42,7 +40,7 @@ export default function HomePage() {
 
   function logOut(){
     axios.delete(`${import.meta.env.VITE_API_URL}/session`,config)
-    .catch(err=>console.log(err))
+    .catch()
     localStorage.clear()
     nav("/")
   }
@@ -50,10 +48,8 @@ export default function HomePage() {
   function deleteItem(id){
     if(confirm("Você deseja apagar este item?")){
       axios.delete(`${import.meta.env.VITE_API_URL}/transaction/${id}`,config)
-      .then(r=>console.log(r))
-      .catch(e=>{console.log(e)})
+      .catch()
       .then(()=>setList())
-      console.log(id)
     }
   }
 
@@ -66,7 +62,7 @@ export default function HomePage() {
 
       <TransactionsContainer>
         <ul>
-          {list==undefined?console.log("none"):list.map(e=>(
+          {list==undefined?<></>:list.map(e=>(
             <ListItemContainer key={e._id}>
               <div>
                 <span>{e.day}</span>

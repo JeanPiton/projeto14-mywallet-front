@@ -1,6 +1,6 @@
+import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 export const UserContext = createContext()
 
@@ -13,8 +13,7 @@ export default function UserProvider({children}){
         if(lsUser==null&&window.location.pathname!="/"&&window.location.pathname!="/cadastro") return navigate("/")
         axios.post(`${import.meta.env.VITE_API_URL}/token`,{email:user.email,token:user.token})
         .then(()=>{navigate("/home")})
-        .catch(()=>{if(window.location.pathname!="/"&&window.location.pathname!="/cadastro") navigate("/")
-        console.log(user)})
+        .catch(()=>{if(window.location.pathname!="/"&&window.location.pathname!="/cadastro") navigate("/")})
     },[])
 
     return (
